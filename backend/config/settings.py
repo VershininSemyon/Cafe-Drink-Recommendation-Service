@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'users',
     'authentication',
+    'drinks',
 ]
 
 MIDDLEWARE = [
@@ -227,6 +228,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'drinks': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 
@@ -310,6 +316,13 @@ CACHES = {
             'PASSWORD': settings.REDIS_PASSWORD
         },
     }
+}
+
+CACHE_KEYS = {
+    'DRINKS_LIST': {
+        'KEY': 'drinks',
+        'TTL': 3600 * 24 * 7 # Неделя
+    },
 }
 
 
