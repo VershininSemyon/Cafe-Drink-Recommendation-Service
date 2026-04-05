@@ -18,4 +18,5 @@ urlpatterns = [
     path('api/v1/users/', include('users.urls')),
     path('api/v1/auth/', include('authentication.urls')),
     path('api/v1/drinks/', include('drinks.urls')),
+    path('api/v1/', include('ai_recommendation.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

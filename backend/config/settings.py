@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'authentication',
     'drinks',
+    'ai_recommendation',
 ]
 
 MIDDLEWARE = [
@@ -229,6 +230,11 @@ LOGGING = {
             'propagate': False,
         },
         'drinks': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'ai_recommendation': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': False,
