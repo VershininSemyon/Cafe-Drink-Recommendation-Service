@@ -18,7 +18,7 @@ class Message(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
     dialog = models.ForeignKey(Dialog, related_name='messages', on_delete=models.CASCADE)
     text = models.TextField()
-    filters = models.JSONField()
+    filters = models.JSONField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
