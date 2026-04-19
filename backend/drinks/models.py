@@ -26,3 +26,17 @@ class Drink(models.Model):
     
     def __str__(self):
         return self.name
+
+    def convert_to_string(self) -> str:
+        result = f"""
+            Название: {self.name}
+            Описание: {self.description}
+            Крепость: {self.strength}
+            Сладость: {self.sweetness}
+            Горечь: {self.bitterness}
+            Температура: {self.temperature}
+            Без кофеина: {self.caffeine_free}
+            На молочной основе: {self.milk_based}
+        """
+
+        return result

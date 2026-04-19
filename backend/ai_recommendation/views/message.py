@@ -7,6 +7,7 @@ from ..models import Message
 from ..permissions import IsDialogCreator
 from ..serializers.common import MessageSerializer
 from ..serializers.detailed import DetailedMessageSerializer
+from ..tasks import process_message
 
 
 class BaseMessageAPIView:
@@ -21,6 +22,17 @@ class BaseMessageAPIView:
 
 class ListCreateMessageAPIView(BaseMessageAPIView, generics.ListCreateAPIView):
     serializer_class = MessageSerializer
+
+    def perform_create(self, serializer):
+        data = serializer.save()
+
+        process_message.delay(
+            message_text=data.text,
+            drink_filters=data.filters,
+            message_id=data.id,
+            dialog_id=data.dialog.id,
+            user_id=data.dialog.user.id
+        )
 
 
 class RetrieveDestroyMessageAPIView(BaseMessageAPIView, generics.RetrieveDestroyAPIView):
